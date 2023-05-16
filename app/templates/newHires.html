@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>New Hire Onboarding Form</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+<h1>New Hire Onboarding Form</h1>
+<form>
+    <label for="full_name">Full Name:</label>
+    <input type="text" id="full_name" name="full_name" required><br><br>
+
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" required><br><br>
+
+    <label for="job_title">Job Title:</label>
+    <input type="text" id="job_title" name="job_title" required><br><br>
+
+    <label for="department">Department:</label>
+    <input type="text" id="department" name="department" required><br><br>
+
+    <label for="manager">Manager:</label>
+    <input type="text" id="manager" name="manager" required><br><br>
+
+    <label for="employee_id">Employee ID:</label>
+    <input type="text" id="employee_id" name="employee_id" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br><br>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br><br>
+
+    <label for="emergency_contact_name">Emergency Contact Name:</label>
+    <input type="text" id="emergency_contact_name" name="emergency_contact_name" required><br><br>
+
+    <label for="emergency_contact_phone">Emergency Contact Phone:</label>
+    <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br><br>
+
+    <label for="computer_needs">Computer Needs:</label>
+    <input type="text" id="computer_needs" name="computer_needs" required><br><br>
+
+    <label for="additional_notes">Additional Notes:</label><br>
+    <textarea id="additional_notes" name="additional_notes" rows="5" cols="50"></textarea><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pre-boarding Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: #3e8e41; /* Darker green */
+    }
+
+    h1 {
+      font-size: 32px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+
+    select {
+      appearance: none;
+      background-color: skyblue;
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 4px #719ECE;
+      border-color: #719ECE;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Pre-boarding Tasks</h1>
+  <p>Pre-boarding tasks that help new hires complete important paperwork, such as tax forms and employment contracts, before their first day:</p>
+  <table>
+    <thead>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Complete Tax Forms</td>
+      <td>Fill out and submit W-4 and state tax forms.</td>
+      <td>
+        <select>
+          <option value="not-started">Not Started</option>
+          <option value="in-progress" selected>In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Sign Employment Contract</td>
+      <td>Review and sign the employment contract.</td>
+      <td>
+        <label>
+          <select>
+            <option value="not-started" selected>Not Started</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>Provide ID and Verification</td>
+      <td>Provide identification documents for verification purposes.</td>
+      <td>
+        <label>
+          <select>
+            <option value="not-started" selected>Not Started</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+      <button type="submit" class="button">Submit</button>
