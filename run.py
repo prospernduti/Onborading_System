@@ -1,5 +1,7 @@
-from app import app
+from app import app,db
 
-if __name__ == '__main__':
-    app.run(debug=True)
 from app import views
+from app.models import Employees
+
+app.app_context().push()
+db.create_all()

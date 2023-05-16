@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="../CSS/style.css">
-
   <style>
     .container {
       max-width: 800px;
@@ -11,62 +9,76 @@
       padding: 20px;
       overflow-x: auto;
     }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    
+    .delete-btn {
+      padding: 10px 20px;
+      border: 10px;
+      background-color: #ddd;
+      cursor: pointer;
+      text-align: center;
+      color: black;
+    }
+    .edit-btn{
+      padding: 10px 20px;
+      border: 30px;
+      background-color: #ddd;
+      color: rgb(58, 18, 217);
+      text-align: center;
+      cursor: pointer;
+    }
+    
+
+    .delete-btn {
+      color: red;
+    }
   </style>
 </head>
 <body>
-<div >
-  <h1>Admin Dashboard</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>Full Name</th>
-      <th>Start Date</th>
-      <th>Job Title</th>
-      <th>Department</th>
-      <th>Manager</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Emergency Contact Phone</th>
-      <th>Computer Needs</th>
-      <th>Additional Notes</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>Jane Smith</td>
-      <td>2023-05-01</td>
-      <td>Software Engineer</td>
-      <td>Engineering</td>
-      <td>John Doe</td>
-      <td>jane.smith@example.com</td>
-      <td>555-1234</td>
-      <td>555-5678</td>
-      <td>Laptop</td>
-      <td>None</td>
-      <td>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-      </td>
-    </tr>
-    <tr>
-      <td>John Doe</td>
-      <td>2023-05-01</td>
-      <td>Engineering Manager</td>
-      <td>Engineering</td>
-      <td>Jane Smith</td>
-      <td>john.doe@example.com</td>
-      <td>555-5678</td>
-      <td>555-1234</td>
-      <td>Desktop</td>
-      <td>None</td>
-      <td>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
