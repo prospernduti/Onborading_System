@@ -2,7 +2,11 @@
 <html>
 <head>
   <title>Login Form</title>
+  <script>
+    
+  </script>
   <style>
+    
     body {
       background-color: #f2f2f2;
     }
@@ -70,7 +74,8 @@
 </head>
 <body>
 <div id="container">
-  <form>
+  <form action="/authenticate" method="POST" onsubmit="return validateLogin()">
+    <!-- Form contents -->
     <div class="imgcontainer">
       <h1>Login Form</h1>
     </div>
@@ -91,6 +96,19 @@
       <span"> <a class="button_login" href="/signup">Sign up</a></span>
 
   </form>
+  <div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul >
+        {% for message in messages %}
+          <li >{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  </div>
 </div>
 </body>
+
+
 </html>

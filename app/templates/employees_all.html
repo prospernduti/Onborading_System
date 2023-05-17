@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .delete-btn {
+      padding: 10px 20px;
+      border: 10px;
+      background-color: #ddd;
+      cursor: pointer;
+      text-align: center;
+      color: black;
+    }
+
+    .edit-btn {
+      padding: 10px 20px;
+      border: 30px;
+      background-color: #ddd;
+      color: rgb(58, 18, 217);
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Manager</th>
+          <th>Phone number</th>
+          <th>Emergency Contact</th>
+          <th>Start date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td class="editable" contenteditable="true">{{ row[0] }}</td>
+          <td class="editable" contenteditable="true">{{ row[1] }}</td>
+          <td class="editable" contenteditable="true">{{ row[2] }}</td>
+          <td class="editable" contenteditable="true">{{ row[3] }}</td>
+          <td class="editable" contenteditable="true">{{ row[4] }}</td>
+          <td class="editable" contenteditable="true">{{ row[5] }}</td>
+          <td class="editable" contenteditable="true">{{ row[7] }}</td>
+          <td class="editable" contenteditable="true">{{ row[8] }}</td>
+          <td>
+            <button class="edit-btn" onclick="editRow(this.parentNode.parentNode)">Save</button>
+            <button class="delete-btn" onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <nav>
+      <ul>
+          <li><a href="/homepage">Home</a></li>
+          <li><a href="/signup">Register</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="">Employees</a></li>
+      </ul>
+  </nav>
+  </div>
+
+  <script>
+    function editRow(row) {
+      const cells = row.getElementsByTagName('td');
+      const name = cells[0].innerText;
+      const email = cells[1].innerText;
+      const department = cells[2].innerText;
+      const manager = cells[3].innerText;
+      const phone = cells[4].innerText;
+      const emergencyContact = cells[5].innerText;
+      const startDate = cells[7].innerText;
+      const status = cells[8].innerText;
+
+      const data = {
+        name: name,
+        email: email,
+        department: department,
+        manager: manager,
+        phone: phone,
+        emergency_contact: emergencyContact,
+        starting_date: startDate,
+        status: status
+      };
+
+      fetch('/update_emp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          alert('Successfully edited');
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Unable to update');
+        });
+    }
+
+    function deleteRow(row) {
+      if (confirm('Are you sure you want to delete this record?')) {
+        const cells = row.getElementsByTagName('td');
+        const email = cells[1].innerText;
+
+        const data = {
+          email: email
+        };
+
+        fetch('/delete_emp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+          .then(response => response.text())
+          .then(result => {
+            console.log(result);
+            alert('Successfully deleted');
+            row.remove();
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Unable to delete');
+          });
+      }
+    }
+  </script>
+</body>
+</html>
