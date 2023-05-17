@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <title>Admin Dashboard</title>
   <style>
     .container {
@@ -65,20 +67,96 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
-        {% for row in rows %}
-        <tr>
-          <td>{{ row[1] }}</td>
-          <td>{{ row[2] }}</td>
-          <td>{{ row[3] }}</td>
-          <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
+      <!-- Your HTML code -->
+<tbody>
+  {% for row in rows %}
+  <tr>
+    <td class="editable" contenteditable="true">{{ row[0] }}</td>
+    <td class="editable" contenteditable="true">{{ row[1] }}</td>
+    <td class="editable" contenteditable="true">{{ row[2] }}</td>
+    <td>
+      <button class="edit-btn" onclick="editRow(this.parentNode.parentNode)">Save</button>
+      <button class="delete-btn" onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+
+
     </table>
   </div>
+
+  <script>
+    // Your JavaScript code
+// Your JavaScript code
+function editRow(row) {
+  const cells = row.getElementsByTagName('td');
+  const name = cells[0].innerText;
+  const email = cells[1].innerText;
+  const department = cells[2].innerText;
+
+  // Create an object with the updated data
+  const data = {
+    name: name,
+    email: email,
+    department: department
+  };
+
+  // Make the AJAX request to update the data
+  fetch('/update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json' // Set the Content-Type header to JSON
+    },
+    body: JSON.stringify(data) // Convert the data object to JSON string
+  })
+    .then(response => response.text())
+    .then(result => {
+      console.log(result); 
+      alert('Successfully edited');
+      // Log the response from the server
+      // Handle any further actions or display a success message
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Unable to update');
+      // Handle error scenarios or display an error message
+    });
+}
+
+
+function deleteRow(row) {
+      if (confirm('Are you sure you want to delete this record?')) {
+        const cells = row.parentNode.parentNode.getElementsByTagName('td');
+        const email = cells[1].innerText;
+
+        const data = {
+          email: email
+        };
+
+        fetch('/delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data
+)
+})
+.then(response => response.text())
+.then(result => {
+console.log(result);
+alert('Successfully deleted');
+row.parentNode.parentNode.remove();
+})
+.catch(error => {
+console.error('Error:', error);
+alert('Unable to delete');
+});
+}
+}
+  </script>
 </body>
+</html>
+
 </html>
