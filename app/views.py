@@ -99,7 +99,7 @@ def authenticate():
             stored_password = user[2]
             stored_username=user[1]
             if stored_password == password:
-                return redirect(url_for('NewHire'))
+                return redirect(url_for('employees'))
             elif stored_username==username:
                 return "<script>alert('Unable to sign in. Please check your credentials.'); window.location.href='/login';</script>"
             
@@ -210,7 +210,7 @@ def insert_new_hire():
         cur.close()
         conn.close()
       
-        return redirect(url_for('employees'))
+        return redirect(url_for('Onboarding_tasks'))
     except psycopg2.errors.InvalidTextRepresentation as e:
         print(f"InvalidTextRepresentation: {e}")
 
@@ -226,27 +226,29 @@ def delete_emp():
     name = data.get('full_name')
     starting_date=data.get('start_date')
     email = data.get('email')
+    title=data.get('job_title')
     manager=data.get('manager')
     department = data.get('department')
     phone=data.get('phone')
     emergency_contact=data.get('emergency_contact_phone')
     status=data.get('status')
-    print(f'{name}, {email}, {manager}, {department}, {phone}, {emergency_contact}, {starting_date}, {status}')
+    
+    print(f'{name}, {email}, {manager}, {department},{title} {phone}, {emergency_contact}, {starting_date}, {status}')
     try:
         conn = db_connection()
         cur = conn.cursor()
-        cur.execute("UPDATE employees SET name=%s, email=%s, manager=%s, department=%s, phone, emergency_contact=%s, starting_date=%s, status=%s WHERE email = %s", (name, email, manager, department, phone, emergency_contact, starting_date, status))
+        cur.execute("UPDATE employees SET name=%s, email=%s, manager=%s, department=%s, phone=%s, emergency_contact=%s, starting_date=%s, status=%s WHERE email = %s", (name, email, manager, department, phone, emergency_contact, starting_date, status))
         conn.commit()
         
         cur.close()
         conn.close()
 
         
-        return 'Record deleted successfully'
+        return 'Record has been updated successfully'
     except Exception as e:
         print(f"Exception: {e}")
         
-        return 'Error occurred during deletion'
+        return 'Error occurred during updating'
 
 
 @app.route('/delete_emp', methods=['POST'])

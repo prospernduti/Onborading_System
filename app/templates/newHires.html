@@ -57,6 +57,18 @@
             font-size: 16px;
         }
 
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            align-items: flex-end;
+            font-size: 16px;
+        }
+
         input[type="submit"]:hover {
             background-color: #45a049;
         }
@@ -89,7 +101,6 @@
         <label for="emergency_contact_phone">Emergency Contact Phone:</label>
         <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone" required ><br><br>
 
-
         <label for="status">Status:</label>
         <select id="status" name="status" required>
             <option value="Onboard">Onboarded</option>
@@ -97,6 +108,7 @@
             <option value="In Progress">In Progress</option>
         </select><br><br>
         <input type="submit" value="Submit">
+        <a class="btn" href="/homepage">Go back</a>
     </form>
 </body>
 </html>

@@ -1,0 +1,39 @@
+# Stage 1: Build the PostgreSQL database image
+FROM postgres:latest AS db
+
+# Set the environment variables for the database creation
+ENV POSTGRES_DB=postgres
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=
+
+# Copy the SQL initialization script to the container
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
+
+# Stage 2: Build the Flask app image
+FROM python:3.9 AS app
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the Flask app code into the container
+COPY . .
+
+# Install required Python packages
+RUN pip install -r requirements.txt
+
+# Set the environment variable for the database connection
+ENV DATABASE_URL postgresql+psycopg2://postgres@db:5432/postgres
+
+# Expose port 5000 for Flask
+EXPOSE 5005
+
+# Wait for the database to be available
+RUN apt-get update && apt-get install -y netcat
+COPY wait-for.sh /wait-for.sh
+RUN chmod +x /wait-for.sh
+
+# Run the Flask app
+CMD ["/bin/bash", "-c", "/wait-for.sh db:5432 -- flask run --host=0.0.0.0"]
