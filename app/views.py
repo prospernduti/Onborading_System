@@ -6,6 +6,8 @@ from flask import request,jsonify
 from werkzeug.urls import url_parse
 import datetime
 import psycopg2
+from app import mail
+from flask_mail import Message
 
 
 
@@ -209,6 +211,7 @@ def insert_new_hire():
         conn.commit()
         cur.close()
         conn.close()
+        msg=Message('Welcome to AUCA', sender=app.config['ADMINS'][0])
       
         return redirect(url_for('Onboarding_tasks'))
     except psycopg2.errors.InvalidTextRepresentation as e:
@@ -233,7 +236,7 @@ def delete_emp():
     emergency_contact=data.get('emergency_contact_phone')
     status=data.get('status')
     
-    print(f'{name}, {email}, {manager}, {department},{title} {phone}, {emergency_contact}, {starting_date}, {status}')
+    #print(f'{name}, {email}, {manager}, {department},{title} {phone}, {emergency_contact}, {starting_date}, {status}')
     try:
         conn = db_connection()
         cur = conn.cursor()
